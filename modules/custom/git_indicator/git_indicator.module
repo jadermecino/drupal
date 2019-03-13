@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Contains selfcare_git_indicator.module.
+ */
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function git_indicator_toolbar_alter(&$items) {
+  if (isset($items['environment_indicator']) && isset($items['environment_indicator']['tab'])) {
+    /** @var \Drupal\git_indicator\GitIndicatorDiscovery $gitIndicatorDiscovery */
+    $gitIndicatorDiscovery = \Drupal::service('git_indicator.git_discovery');
+    $git_info = $gitIndicatorDiscovery->getGitInfo();
+    $title = $items['environment_indicator']['tab']['#title'];
+    $title = empty($git_info) ? $title : $title . ' (' . $git_info . ')';
+    $items['environment_indicator']['tab']['#title'] = $title;
+  }
+}
+
+/**
+ * Implements hook_page_top().
+ */
+function git_indicator_page_top(array &$page_top) {
+  if (isset($page_top['indicator'])) {
+    $title = $page_top['indicator']['#title'];
+    /** @var \Drupal\git_indicator\GitIndicatorDiscoveryInterface $gitIndicatorDiscovery */
+    $gitIndicatorDiscovery = \Drupal::service('git_indicator.discovery');
+    $git_info = $gitIndicatorDiscovery->getGitInfo();
+    $title = empty($git_info) ? $title : $title . ' (' . $git_info . ')';
+    $page_top['indicator']['#title'] = $title;
+  }
+}

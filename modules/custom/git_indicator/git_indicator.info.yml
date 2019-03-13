@@ -1,0 +1,9 @@
+name : Git indicator
+type: module
+description : 'Se encarga de mostrar el branch actual junto con el commit del HEAD'
+core: 8.x
+version: 8.x-1.0
+package: Bits
+
+dependencies:
+  - drupal:environment_indicator (>= 8.x-3.3)

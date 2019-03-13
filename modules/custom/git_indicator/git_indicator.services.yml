@@ -1,0 +1,8 @@
+services:
+  git_indicator.route_subscriber:
+    class: Drupal\git_indicator\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  git_indicator.discovery:
+      class: Drupal\git_indicator\GitIndicatorDiscovery
+      arguments: ["@cache.default", "@config.factory"]
