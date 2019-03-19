@@ -10,6 +10,7 @@
         "drupal/console": "~1.0",
         "drupal/devel": "^2.0",
         "drupal/environment_indicator": "^3.5",
+        "drupal/examples": "1.x-dev",
         "wikimedia/composer-merge-plugin": "^1.4"
     },
     "replace": {

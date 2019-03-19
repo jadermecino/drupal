@@ -1,0 +1,7 @@
+atomos.example:
+  path: '/atomos'
+  defaults:
+    _controller: '\Drupal\atomos\Controller\AtomosController::content'
+    _title: 'Atomos example'
+  requirements:
+    _permission: 'access content'

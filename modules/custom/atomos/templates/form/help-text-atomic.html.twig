@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override for a form element label.
+ *
+ * Available variables:
+ * - title: The label's text.
+ * - attributes: A list of HTML attributes for the label.
+ *
+ * @see template_preprocess_help_text_atomic()
+ */
+#}
+{%
+  set classes = [
+    'help-text-atomic',
+  ]
+%}
+<small{{ attributes.addClass(classes) }}>{{ title }}</small>

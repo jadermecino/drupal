@@ -2,9 +2,12 @@
 
 namespace Drupal\Tests\git_indicator\Unit;
 
+use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\Tests\UnitTestCase;
 use Drupal\git_indicator\GitIndicatorDiscovery;
+use Drupal\Tests\git_indicator\Unit\GitIndicatorDiscovery as GitIndicatorDiscoveryFake;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\git_indicator\GitIndicatorDiscovery
@@ -39,28 +42,40 @@ class GitIndicatorDiscoveryTest extends UnitTestCase {
     \Drupal::setContainer($container);
 
     $this->cacheDefault = $this->createMock('Drupal\Core\Cache\CacheBackendInterface');
+    $initialData = new \stdClass();
+    $initialData->data = TRUE;
+    $this->cacheDefault->expects($this->any())
+      ->method('get')
+      ->will($this->returnValue($initialData));
+
+    $inmutableConfig = $this->createMock('Drupal\Core\Config\ImmutableConfig');
+    $inmutableConfig->expects($this->any())
+      ->method('get')
+      ->will($this->returnValue(TRUE));
+
     $this->configFactory = $this->createMock('Drupal\Core\Config\ConfigFactoryInterface');
+    $this->configFactory->expects($this->any())
+      ->method('get')
+      ->will($this->returnValue($inmutableConfig));
 
-    $gitIndicatorDiscovery = new GitIndicatorDiscovery($this->cacheDefault, $this->configFactory);
-
-    $container->set('git_indicator.discovery', $gitIndicatorDiscovery);
-
-  }
-
-  /**
-   * Checks if the service is created in the Drupal context.
-   */
-  public function testGitIndicatorDiscoveryService() {
-    $this->assertNotNull(\Drupal::service('git_indicator.discovery'));
   }
 
   /**
    * Checks whether it is possible to clone a site from a gitLab repository.
    */
-  public function testgetGitInfo() {
-    /** @var \Drupal\git_indicator\GitIndicatorDiscovery $returnBoolean */
-    $returnBoolean = \Drupal::service('git_indicator.discovery')->getGitInfo();
-    $this->assertEquals(TRUE, $returnBoolean);
+  public function testGetGitConfigTrue() {
+    /** @var \Drupal\git_indicator\GitIndicatorDiscovery $gitIndicatorDiscovery */
+    $gitIndicatorDiscovery = new GitIndicatorDiscovery($this->cacheDefault, $this->configFactory);
+    $this->assertNotNull($gitIndicatorDiscovery->getGitInfo());
+  }
+
+  /**
+   * Checks whether it is possible to clone a site from a gitLab repository.
+   */
+  public function testgetGitInfoEmpty() {
+    /** @var \Drupal\git_indicator\GitIndicatorDiscovery $gitIndicatorDiscovery */
+    $gitIndicatorDiscovery = new GitIndicatorDiscoveryFake($this->cacheDefault, $this->configFactory);
+    $this->assertEmpty($gitIndicatorDiscovery->getGitInfo());
   }
 
 }

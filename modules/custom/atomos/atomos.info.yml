@@ -1,0 +1,6 @@
+name : Atomos
+type: module
+description : 'Atomos para transformación digital'
+core: 8.x
+version: 8.x-1.0
+package: Bits
