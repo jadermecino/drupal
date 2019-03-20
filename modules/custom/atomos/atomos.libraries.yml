@@ -3,12 +3,20 @@ stylesheet:
   css:
     theme:
       css/atomos.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
 
 textfield:
   version: VERSION
   js:
     js/form/textfield_atomic.js: {}
   dependencies:
-    - core/jquery
-    - core/jquery.once
+    - atomos/stylesheet
+
+switch:
+  version: VERSION
+  js:
+    js/switch_atomic.js: {}
+  dependencies:
     - atomos/stylesheet

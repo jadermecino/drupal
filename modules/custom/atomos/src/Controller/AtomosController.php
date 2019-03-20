@@ -38,6 +38,10 @@ class AtomosController extends ControllerBase {
       '#type' => 'help_text_atomic',
       '#title' => $this->t('Texto de ayuda'),
     ];
+    $build['container']['switch'] = [
+      '#type' => 'switch_atomic',
+      '#message' => $this->t('Slide.'),
+    ];
     return $build;
   }
 

@@ -28,6 +28,9 @@ function atomos_theme($existing, $type, $theme, $path) {
       'render element' => 'element',
       'path' => drupal_get_path('module','atomos') . '/templates/form',
     ],
+    'switch_atomic' => [
+      'render element' => 'element',
+    ],
   ];
 }
 
@@ -83,4 +86,18 @@ function template_preprocess_form_element_atomic(&$variables) {
  */
 function template_preprocess_form_element_label_atomic(&$variables) {
   template_preprocess_form_element_label($variables);
+}
+
+/**
+ * Prepares variables for form label templates.
+ *
+ * Default template: switch-atomic.html.twig.
+ */
+function template_preprocess_switch_atomic(&$variables) {
+  $element = $variables['element'];
+  if (isset($element['#message']) && !empty((string) $element['#message'])) {
+    $variables['message'] = $element['#message'];
+  } else {
+    $variables['message'] = t('Slide to continue.');
+  }
 }

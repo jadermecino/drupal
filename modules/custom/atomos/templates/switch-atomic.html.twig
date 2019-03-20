@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Theme override for a element switch.
+ *
+ * Available variables:
+ * - message: The label's text.
+ * - attributes: A list of HTML attributes for the label.
+ *
+ * @see template_preprocess_switch_atomic()
+ */
+#}
+<div{{ attributes.addClass(classes) }}>
+  <div class="status">
+    <div class="progress-status"></div>
+    <div class="text-status">
+      <p>{{ message }}</p>
+    </div>
+    <div class="button-switch">
+      <span class="ic-regresar"></span>
+    </div>
+  </div>
+</div>
