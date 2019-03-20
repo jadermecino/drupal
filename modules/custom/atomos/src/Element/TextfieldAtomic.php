@@ -44,6 +44,7 @@ class TextfieldAtomic extends TextFieldParent {
     $element['#attributes']['type'] = 'text';
     Element::setAttributes($element, ['id', 'name', 'value', 'size', 'maxlength', 'placeholder']);
     static::setAttributes($element, ['textfield-atomic']);
+    $element['#attached']['library'] = ['atomos/textfield'];
     return $element;
   }
 

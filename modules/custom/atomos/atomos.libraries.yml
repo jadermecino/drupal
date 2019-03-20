@@ -1,0 +1,14 @@
+stylesheet:
+  version: VERSION
+  css:
+    theme:
+      css/atomos.css: {}
+
+textfield:
+  version: VERSION
+  js:
+    js/form/textfield_atomic.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - atomos/stylesheet
