@@ -38,8 +38,6 @@ function atomos_theme($existing, $type, $theme, $path) {
  */
 function template_preprocess_help_text_atomic(&$variables) {
   $element = $variables['element'];
-  Element::setAttributes($element, ['id', 'name']);
-  RenderElement::setAttributes($element, ['help-text-atomic']);
   if (isset($element['#title']) && !empty((string) $element['#title'])) {
     $variables['title'] = $element['#title'];
   }

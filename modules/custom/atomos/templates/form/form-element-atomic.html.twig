@@ -75,6 +75,9 @@
     </div>
   {% endif %}
   {{ children }}
+  {% if help_text %}
+    {{ help_text }}
+  {% endif %}
   {% if suffix is not empty %}
     <span class="field-suffix">{{ suffix }}</span>
   {% endif %}
@@ -90,8 +93,5 @@
     <div{{ description.attributes.addClass(description_classes) }}>
       {{ description.content }}
     </div>
-  {% endif %}
-  {% if help_text %}
-    {{ help_text }}
   {% endif %}
 </div>
